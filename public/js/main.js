@@ -68,4 +68,18 @@ $('button.sidebar-toggler').click(function () {
       $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
     }, 275);
   })
+
+  $('#sidebar-enable, #sidebar-disable').click(function () {
+    $('#sidebar-disable').toggleClass('hidden block');
+    $('#sidebar').toggleClass('-translate-x-full ease-in translate-x-0 ease-out');
+  })
+
+  $('.nav-dropdown').click(function () {
+    $(this).children('.dropdown-items:first').toggleClass('block hidden');
+  })
+
+  if ($('.dropdown-items .nav-active')) {
+    $('.dropdown-items .nav-active').parents('.nav-dropdown').click();
+  }
+
 })
