@@ -64,19 +64,17 @@
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="container mx-auto px-6 py-8">
                     @if(session('message'))
-                        <div class="row mb-2">
-                            <div class="col-lg-12">
-                                <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-                            </div>
+                        <div class="flex max-w w-full bg-green-300 shadow-md rounded-lg overflow-hidden mb-4 py-4 px-6 text-green-700 font-medium">
+                            {{ session('message') }}
                         </div>
                     @endif
                     @if($errors->count() > 0)
-                        <div class="alert alert-danger">
-                            <ul class="list-unstyled">
-                                @foreach($errors->all() as $error)
+                        <div class="flex max-w w-full bg-red-300 shadow-md rounded-lg overflow-hidden mb-4 py-4 px-6 text-red-700 font-medium">
+                            @foreach($errors->all() as $error)
+                                <ul class="list-none">
                                     <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                                </ul>
+                            @endforeach
                         </div>
                     @endif
                     @yield('content')
