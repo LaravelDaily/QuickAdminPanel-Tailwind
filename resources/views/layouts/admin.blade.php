@@ -70,11 +70,11 @@
                     @endif
                     @if($errors->count() > 0)
                         <div class="flex max-w w-full bg-red-300 shadow-md rounded-lg overflow-hidden mb-4 py-4 px-6 text-red-700 font-medium">
-                            @foreach($errors->all() as $error)
-                                <ul class="list-none">
+                            <ul class="list-none">
+                                @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>
-                                </ul>
-                            @endforeach
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
                     @yield('content')
