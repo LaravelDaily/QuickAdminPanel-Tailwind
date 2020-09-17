@@ -1,47 +1,41 @@
 @extends('layouts.admin')
 @section('content')
-
-<div class="card">
-    <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.permission.title') }}
+<div class="max-w w-full bg-white shadow-md rounded-md overflow-hidden border">
+    <div class="flex justify-between items-center px-5 py-3 text-gray-700 border-b">
+        <h3 class="text-sm">{{ trans('global.show') }} {{ trans('cruds.permission.title') }}</h3>
     </div>
 
-    <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.permissions.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
-            <table class="table table-bordered table-striped">
-                <tbody>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.permission.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $permission->id }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.permission.fields.title') }}
-                        </th>
-                        <td>
-                            {{ $permission->title }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.permissions.index') }}">
-                    {{ trans('global.back_to_list') }}
-                </a>
-            </div>
+    <div class="px-5 py-6 bg-gray-200 text-gray-700 border-b">
+        <div class="block pb-4">
+            <a class="inline-block px-3 py-2 rounded-sm text-sm focus:outline-none mx-1 bg-gray-300 hover:bg-gray-400 text-black" href="{{ route('admin.permissions.index') }}">
+                {{ trans('global.back_to_list') }}
+            </a>
+        </div>
+        <table class="w-full table-auto striped bordered bg-white show-table">
+            <tbody>
+                <tr>
+                    <th>
+                        {{ trans('cruds.permission.fields.id') }}
+                    </th>
+                    <td>
+                        {{ $permission->id }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ trans('cruds.permission.fields.title') }}
+                    </th>
+                    <td>
+                        {{ $permission->title }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="block pt-4">
+            <a class="inline-block px-3 py-2 rounded-sm text-sm focus:outline-none mx-1 bg-gray-300 hover:bg-gray-400 text-black" href="{{ route('admin.permissions.index') }}">
+                {{ trans('global.back_to_list') }}
+            </a>
         </div>
     </div>
 </div>
-
-
-
 @endsection

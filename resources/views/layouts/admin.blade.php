@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
@@ -62,7 +62,7 @@
             </header>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                <div class="container mx-auto px-6 py-8">
+                <div class="mx-auto px-6 py-8">
                     @if(session('message'))
                         <div class="flex max-w w-full bg-green-300 shadow-md rounded-lg overflow-hidden mb-4 py-4 px-6 text-green-700 font-medium">
                             {{ session('message') }}
@@ -89,7 +89,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
@@ -120,8 +120,9 @@
     'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
   };
 
-  $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
+  $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'inline-block px-3 py-2 rounded-sm text-sm focus:outline-none mx-1' })
   $.extend(true, $.fn.dataTable.defaults, {
+    responsive: true,
     language: {
       url: languages['{{ app()->getLocale() }}']
     },
@@ -145,7 +146,7 @@
     buttons: [
       {
         extend: 'selectAll',
-        className: 'btn-primary',
+        className: 'bg-indigo-600 hover:bg-indigo-700 text-white',
         text: selectAllButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -158,7 +159,7 @@
       },
       {
         extend: 'selectNone',
-        className: 'btn-primary',
+        className: 'bg-indigo-600 hover:bg-indigo-700 text-white',
         text: selectNoneButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -166,7 +167,7 @@
       },
       {
         extend: 'copy',
-        className: 'btn-default',
+        className: 'bg-gray-300 hover:bg-gray-400 text-black',
         text: copyButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -174,7 +175,7 @@
       },
       {
         extend: 'csv',
-        className: 'btn-default',
+        className: 'bg-gray-300 hover:bg-gray-400 text-black',
         text: csvButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -182,7 +183,7 @@
       },
       {
         extend: 'excel',
-        className: 'btn-default',
+        className: 'bg-gray-300 hover:bg-gray-400 text-black',
         text: excelButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -190,7 +191,7 @@
       },
       {
         extend: 'pdf',
-        className: 'btn-default',
+        className: 'bg-gray-300 hover:bg-gray-400 text-black',
         text: pdfButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -198,7 +199,7 @@
       },
       {
         extend: 'print',
-        className: 'btn-default',
+        className: 'bg-gray-300 hover:bg-gray-400 text-black',
         text: printButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -206,7 +207,7 @@
       },
       {
         extend: 'colvis',
-        className: 'btn-default',
+        className: 'bg-gray-300 hover:bg-gray-400 text-black',
         text: colvisButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -214,8 +215,6 @@
       }
     ]
   });
-
-  $.fn.dataTable.ext.classes.sPageButton = '';
 });
 
     </script>

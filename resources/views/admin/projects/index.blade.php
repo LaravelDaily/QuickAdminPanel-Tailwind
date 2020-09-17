@@ -1,22 +1,20 @@
 @extends('layouts.admin')
 @section('content')
 @can('project_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.projects.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.project.title_singular') }}
-            </a>
-        </div>
+    <div class="block my-4">
+        <a class="px-4 py-2 bg-green-600 text-white rounded-sm text-sm hover:bg-green-500 focus:outline-none" href="{{ route('admin.projects.create') }}">
+            {{ trans('global.add') }} {{ trans('cruds.project.title_singular') }}
+        </a>
     </div>
 @endcan
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.project.title_singular') }} {{ trans('global.list') }}
+<div class="max-w w-full shadow-md rounded-md overflow-hidden border bg-white">
+    <div class="flex justify-between items-center px-5 py-3 text-gray-700 border-b">
+        <h3 class="text-sm">{{ trans('cruds.project.title_singular') }} {{ trans('global.list') }}</h3>
     </div>
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Project">
+    <div class="px-5 py-6 text-gray-700 bg-gray-200 border-b">
+        <div class="w-full">
+            <table class="stripe hover bordered datatable datatable-Project">
                 <thead>
                     <tr>
                         <th width="10">
@@ -50,18 +48,18 @@
                             </td>
                             <td>
                                 @foreach($project->users as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
+                                    <span class="inline-block text-xs px-2 py-1 mr-1 mb-1 rounded-lg text-white bg-blue-600">{{ $item->name }}</span>
                                 @endforeach
                             </td>
                             <td>
                                 @can('project_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.projects.show', $project->id) }}">
+                                    <a class="inline-block px-2 py-1 bg-indigo-600 text-white rounded-sm text-xs hover:bg-indigo-500 focus:outline-none mr-1 mt-1" href="{{ route('admin.projects.show', $project->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('project_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.projects.edit', $project->id) }}">
+                                    <a class="inline-block px-2 py-1 bg-blue-600 text-white rounded-sm text-xs hover:bg-blue-500 focus:outline-none mr-1 mt-1" href="{{ route('admin.projects.edit', $project->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
@@ -70,7 +68,7 @@
                                     <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="inline-block px-2 py-1 bg-red-600 text-white rounded-sm text-xs hover:bg-red-500 focus:outline-none mr-1 mt-1" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 
@@ -83,9 +81,6 @@
         </div>
     </div>
 </div>
-
-
-
 @endsection
 @section('scripts')
 @parent
@@ -97,7 +92,7 @@
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.projects.massDestroy') }}",
-    className: 'btn-danger',
+    className: 'bg-red-600 text-white hover:bg-red-500',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
           return $(entry).data('entry-id')
