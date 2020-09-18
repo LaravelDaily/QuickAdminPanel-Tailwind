@@ -2,17 +2,17 @@
 @section('content')
 @can('folder_create')
     <div class="block my-4">
-        <a class="px-4 py-2 bg-green-600 text-white rounded-sm text-sm hover:bg-green-500 focus:outline-none" href="{{ route('admin.folders.create') }}">
+        <a class="btn-md btn-green" href="{{ route('admin.folders.create') }}">
             {{ trans('global.add') }} {{ trans('cruds.folder.title_singular') }}
         </a>
     </div>
 @endcan
-<div class="max-w w-full shadow-md rounded-md overflow-hidden border bg-white">
-    <div class="flex justify-between items-center px-5 py-3 text-gray-700 border-b">
-        <h3 class="text-sm">{{ trans('cruds.folder.title_singular') }} {{ trans('global.list') }}</h3>
+<div class="main-card">
+    <div class="header">
+        {{ trans('cruds.folder.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="px-5 py-6 text-gray-700 bg-gray-200 border-b">
+    <div class="body">
         <div class="w-full">
             <table class="stripe hover bordered datatable datatable-Folder">
                 <thead>
@@ -67,13 +67,13 @@
                             </td>
                             <td>
                                 @can('folder_show')
-                                    <a class="inline-block px-2 py-1 bg-indigo-600 text-white rounded-sm text-xs hover:bg-indigo-500 focus:outline-none mr-1 mt-1" href="{{ route('admin.folders.show', $folder->id) }}">
+                                    <a class="btn-sm btn-indigo" href="{{ route('admin.folders.show', $folder->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('folder_edit')
-                                    <a class="inline-block px-2 py-1 bg-blue-600 text-white rounded-sm text-xs hover:bg-blue-500 focus:outline-none mr-1 mt-1" href="{{ route('admin.folders.edit', $folder->id) }}">
+                                    <a class="btn-sm btn-blue" href="{{ route('admin.folders.edit', $folder->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
@@ -82,7 +82,7 @@
                                     <form action="{{ route('admin.folders.destroy', $folder->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="inline-block px-2 py-1 bg-red-600 text-white rounded-sm text-xs hover:bg-red-500 focus:outline-none mr-1 mt-1" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn-sm btn-red" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 
@@ -109,7 +109,7 @@
   let deleteButton = {
     text: deleteButtonTrans,
     url: "{{ route('admin.folders.massDestroy') }}",
-    className: 'bg-red-600 text-white hover:bg-red-500',
+    className: 'btn-red',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
           return $(entry).data('entry-id')

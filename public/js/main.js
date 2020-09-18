@@ -79,7 +79,7 @@ $('button.sidebar-toggler').click(function () {
   })
 
   if ($('.dropdown-items .nav-active')) {
-    $('.dropdown-items .nav-active').parents('.nav-dropdown').click();
+    $('.dropdown-items .active').parents('.nav-dropdown').click();
   }
 
 })

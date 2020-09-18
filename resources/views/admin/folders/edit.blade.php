@@ -1,71 +1,71 @@
 @extends('layouts.admin')
 @section('content')
-<div class="max-w w-full bg-white shadow-md rounded-md overflow-hidden border">
-    <div class="flex justify-between items-center px-5 py-3 text-gray-700 border-b">
-        <h3 class="text-sm">{{ trans('global.edit') }} {{ trans('cruds.folder.title_singular') }}</h3>
+<div class="main-card">
+    <div class="header">
+        {{ trans('global.edit') }} {{ trans('cruds.folder.title_singular') }}
     </div>
 
     <form method="POST" action="{{ route("admin.folders.update", [$folder->id]) }}" enctype="multipart/form-data">
         @method('PUT')
         @csrf
-        <div class="px-5 py-6 bg-gray-200 text-gray-700 border-b">
+        <div class="body">
             <div class="mb-3">
                 <label for="name" class="text-xs required">{{ trans('cruds.folder.fields.name') }}</label>
 
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <input type="text" id="name" name="name" class="form-input w-full px-3 py-2 appearance-none rounded-md focus:border-indigo-600{{ $errors->has('name') ? ' border-red-500' : '' }}" value="{{ old('name', $folder->name) }}" required>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" class="{{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name', $folder->name) }}" required>
                 </div>
                 @if($errors->has('name'))
-                    <p class="text-red-500 text-xs italic mt-2">{{ $errors->first('name') }}</p>
+                    <p class="invalid-feedback">{{ $errors->first('name') }}</p>
                 @endif
                 <span class="block">{{ trans('cruds.folder.fields.name_helper') }}</span>
             </div>
             <div class="mb-3">
                 <label for="project" class="text-xs required">{{ trans('cruds.folder.fields.project') }}</label>
 
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <select class="form-input select2 w-full px-3 py-2 appearance-none rounded-md focus:border-indigo-600{{ $errors->has('project') ? ' border-red-500' : '' }}" name="project_id" id="project" required>
+                <div class="form-group">
+                    <select class="select2{{ $errors->has('project') ? ' is-invalid' : '' }}" name="project_id" id="project" required>
                         @foreach($projects as $id => $project)
                             <option value="{{ $id }}" {{ ($folder->project ? $folder->project->id : old('project_id')) == $id ? 'selected' : '' }}>{{ $project }}</option>
                         @endforeach
                     </select>
                 </div>
                 @if($errors->has('project'))
-                    <p class="text-red-500 text-xs italic mt-2">{{ $errors->first('project') }}</p>
+                    <p class="invalid-feedback">{{ $errors->first('project') }}</p>
                 @endif
                 <span class="block">{{ trans('cruds.folder.fields.project_helper') }}</span>
             </div>
             <div class="mb-3">
                 <label for="folder" class="text-xs">{{ trans('cruds.folder.fields.folder') }}</label>
 
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <select class="form-input select2 w-full px-3 py-2 appearance-none rounded-md focus:border-indigo-600{{ $errors->has('folder') ? ' border-red-500' : '' }}" name="folder_id" id="folder">
+                <div class="form-group">
+                    <select class="select2 {{ $errors->has('folder') ? ' is-invalid' : '' }}" name="folder_id" id="folder">
                         @foreach($folders as $id => $folderName)
                             <option value="{{ $id }}" {{ ($folder->folder ? $folder->folder->id : old('folder_id')) == $id ? 'selected' : '' }}>{{ $folderName }}</option>
                         @endforeach
                     </select>
                 </div>
                 @if($errors->has('folder'))
-                    <p class="text-red-500 text-xs italic mt-2">{{ $errors->first('folder') }}</p>
+                    <p class="invalid-feedback">{{ $errors->first('folder') }}</p>
                 @endif
                 <span class="block">{{ trans('cruds.folder.fields.folder_helper') }}</span>
             </div>
             <div class="mb-3">
                 <label for="files-dropzone" class="text-xs">{{ trans('cruds.folder.fields.files') }}</label>
 
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <div class="needsclick dropzone w-full{{ $errors->has('files') ? ' border-red-500' : '' }}" id="files-dropzone">
+                <div class="form-group">
+                    <div class="needsclick dropzone w-full{{ $errors->has('files') ? ' is-invalid' : '' }}" id="files-dropzone">
                     </div>
                 </div>
                 @if($errors->has('files'))
-                    <p class="text-red-500 text-xs italic mt-2">{{ $errors->first('files') }}</p>
+                    <p class="invalid-feedback">{{ $errors->first('files') }}</p>
                 @endif
                 <span class="block">{{ trans('cruds.folder.fields.files_helper') }}</span>
             </div>
         </div>
 
-        <div class="flex justify-end px-5 py-3">
-            <button type="submit" class="px-3 py-1 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-500 focus:outline-none">{{ trans('global.save') }}</button>
+        <div class="footer">
+            <button type="submit" class="submit-button">{{ trans('global.save') }}</button>
         </div>
     </form>
 </div>

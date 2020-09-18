@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('content')
-<div class="max-w w-full bg-white shadow-md rounded-md overflow-hidden border">
-    <div class="flex justify-between items-center px-5 py-3 text-gray-700 border-b">
-        <h3 class="text-sm">{{ trans('global.show') }} {{ trans('cruds.role.title') }}</h3>
+<div class="main-card">
+    <div class="header">
+        {{ trans('global.show') }} {{ trans('cruds.role.title') }}
     </div>
 
-    <div class="px-5 py-6 bg-gray-200 text-gray-700 border-b">
+    <div class="body">
         <div class="block pb-4">
-            <a class="inline-block px-3 py-2 rounded-sm text-sm focus:outline-none mx-1 bg-gray-300 hover:bg-gray-400 text-black" href="{{ route('admin.roles.index') }}">
+            <a class="btn-md btn-gray" href="{{ route('admin.roles.index') }}">
                 {{ trans('global.back_to_list') }}
             </a>
         </div>
-        <table class="w-full table-auto striped bordered bg-white show-table">
+        <table class="striped bordered show-table">
             <tbody>
                 <tr>
                     <th>
@@ -42,7 +42,7 @@
             </tbody>
         </table>
         <div class="block pt-4">
-            <a class="inline-block px-3 py-2 rounded-sm text-sm focus:outline-none mx-1 bg-gray-300 hover:bg-gray-400 text-black" href="{{ route('admin.roles.index') }}">
+            <a class="btn-md btn-gray" href="{{ route('admin.roles.index') }}">
                 {{ trans('global.back_to_list') }}
             </a>
         </div>

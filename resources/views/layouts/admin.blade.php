@@ -8,8 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ trans('panel.site_title') }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/tailwindcss@^1.4/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -30,9 +29,9 @@
         @include('partials.menu')
 
         <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-600 h-16">
+            <header class="main-header">
                 <div class="flex items-center">
-                    <button id="sidebar-enable" class="text-gray-500 focus:outline-none lg:hidden">
+                    <button id="sidebar-enable" class="sidebar-enable">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -41,11 +40,8 @@
 
                 @if(count(config('panel.available_languages', [])) > 1)
                     <div class="flex items-center">
-                        <div class="relative w-48 mx-4 lg:mx-0">
-                            <select
-                                class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-                                onchange="window.location.href = $(this).val()"
-                            >
+                        <div class="languages">
+                            <select onchange="window.location.href = $(this).val()">
                                 @foreach(config('panel.available_languages') as $langLocale => $langName)
                                     <option
                                         value="{{ url()->current() }}?change_language={{ $langLocale }}"
@@ -53,7 +49,7 @@
                                     >{{ strtoupper($langLocale) }} ({{ $langName }})</option>
                                 @endforeach
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <div class="icon">
                                 <i class="fa fa-caret-down fill-current h-4 w-4" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -64,12 +60,12 @@
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="mx-auto px-6 py-8">
                     @if(session('message'))
-                        <div class="flex max-w w-full bg-green-300 shadow-md rounded-lg overflow-hidden mb-4 py-4 px-6 text-green-700 font-medium">
+                        <div class="alert success">
                             {{ session('message') }}
                         </div>
                     @endif
                     @if($errors->count() > 0)
-                        <div class="flex max-w w-full bg-red-300 shadow-md rounded-lg overflow-hidden mb-4 py-4 px-6 text-red-700 font-medium">
+                        <div class="alert danger">
                             <ul class="list-none">
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -120,7 +116,7 @@
     'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
   };
 
-  $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'inline-block px-3 py-2 rounded-sm text-sm focus:outline-none mx-1' })
+  $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn-md' })
   $.extend(true, $.fn.dataTable.defaults, {
     responsive: true,
     language: {
@@ -146,7 +142,7 @@
     buttons: [
       {
         extend: 'selectAll',
-        className: 'bg-indigo-600 hover:bg-indigo-700 text-white',
+        className: 'btn-indigo',
         text: selectAllButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -159,7 +155,7 @@
       },
       {
         extend: 'selectNone',
-        className: 'bg-indigo-600 hover:bg-indigo-700 text-white',
+        className: 'btn-indigo',
         text: selectNoneButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -167,7 +163,7 @@
       },
       {
         extend: 'copy',
-        className: 'bg-gray-300 hover:bg-gray-400 text-black',
+        className: 'btn-gray',
         text: copyButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -175,7 +171,7 @@
       },
       {
         extend: 'csv',
-        className: 'bg-gray-300 hover:bg-gray-400 text-black',
+        className: 'btn-gray',
         text: csvButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -183,7 +179,7 @@
       },
       {
         extend: 'excel',
-        className: 'bg-gray-300 hover:bg-gray-400 text-black',
+        className: 'btn-gray',
         text: excelButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -191,7 +187,7 @@
       },
       {
         extend: 'pdf',
-        className: 'bg-gray-300 hover:bg-gray-400 text-black',
+        className: 'btn-gray',
         text: pdfButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -199,7 +195,7 @@
       },
       {
         extend: 'print',
-        className: 'bg-gray-300 hover:bg-gray-400 text-black',
+        className: 'btn-gray',
         text: printButtonTrans,
         exportOptions: {
           columns: ':visible'
@@ -207,7 +203,7 @@
       },
       {
         extend: 'colvis',
-        className: 'bg-gray-300 hover:bg-gray-400 text-black',
+        className: 'btn-gray',
         text: colvisButtonTrans,
         exportOptions: {
           columns: ':visible'
