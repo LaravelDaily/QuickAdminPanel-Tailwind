@@ -1,6 +1,6 @@
 ## QuickAdminPanel Demo with Tailwind Theme
 
-Generated adminpanel with Tailwind CSS design based on [tailwindcomponents/dashboard theme](https://github.com/tailwindcomponents/dashboard)
+Laravel adminpanel, generated with our [QuickAdminPanel Generator](https://quickadminpanel.com), with changed design to Tailwind CSS based on [tailwindcomponents/dashboard theme](https://github.com/tailwindcomponents/dashboard)
 
 - - - - -
 
