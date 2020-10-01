@@ -159,7 +159,7 @@ header.main-header {
 .sidebar-enable {
   @apply text-gray-500;
 
-  @media (min-width: theme('screens.lg')) {
+  @screen lg {
     @apply hidden;
   }
 
@@ -171,7 +171,7 @@ header.main-header {
 .sidebar-disable {
   @apply fixed z-20 inset-0 bg-black opacity-50 transition-opacity;
 
-  @media (min-width: theme('screens.lg')) {
+  @screen lg {
     @apply hidden;
   }
 }
@@ -179,7 +179,7 @@ header.main-header {
 .sidebar-menu {
   @apply fixed z-30 inset-y-0 left-0 w-64 bg-gray-900 transition duration-300 overflow-y-auto;
 
-  @media (min-width: theme('screens.lg'))  {
+  @screen lg {
     @apply translate-x-0 static inset-0;
   }
 }
@@ -207,7 +207,7 @@ header.main-header {
 .languages {
   @apply relative w-48 mx-4;
 
-  @media (max-width: theme('screens.lg')) {
+  @screen lg {
     @apply mx-0;
   }
 
